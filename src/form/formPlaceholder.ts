@@ -1,9 +1,10 @@
-import { DemoForm } from "./type";
+import { IFormType } from "./formType";
+import profilePhoto from "../assets/r01/ProfilePhoto.png";
 
-const demo: DemoForm = {
+const formPlaceholder: IFormType = {
   personalInfo: {
     profileInfo: {
-      profilePhoto: "profile.jpg",
+      profilePhoto: profilePhoto,
       fullname: "John Doe",
       profession: "Software Developer",
     },
@@ -71,4 +72,4 @@ const demo: DemoForm = {
   },
 };
 
-export default demo;
+export default formPlaceholder;
