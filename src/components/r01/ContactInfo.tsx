@@ -1,7 +1,22 @@
 import React from "react";
 import { FaEnvelope, FaPhone, FaHouseChimney } from "react-icons/fa6";
+import useDataFiller from "../../hooks/useDataFiller";
+// import { useAppSelector } from "../../store/hooks";
 
 const ContactInfo: React.FC = () => {
+  // const placeholderData = useAppSelector((state) => {
+  //   if (state.form.onDemo) {
+  //     return state.form.placeholderData.personalInfo.contactInfo;
+  //   } else {
+  //     return (
+  //       state.form.userData?.personalInfo.contactInfo ||
+  //       state.form.placeholderData.personalInfo.contactInfo
+  //     );
+  //   }
+  // });
+
+  const data = useDataFiller((data) => data.personalInfo.contactInfo);
+
   return (
     <div className="pt-12">
       <h3 className="text-white uppercase font-semibold tracking-[0.1rem] mb-8 text-[1.872rem]">
@@ -13,7 +28,7 @@ const ContactInfo: React.FC = () => {
             <FaEnvelope />
           </span>
           <span className="text-white text-[1.2rem] font-light pl-2">
-            Vusal.feyruz@gmail.com
+            {data.email}
           </span>
         </li>
         <li className="flex items-center mx-0 my-4 h-[2.7rem]">
@@ -21,7 +36,7 @@ const ContactInfo: React.FC = () => {
             <FaPhone />
           </span>
           <span className="text-white text-[1.2rem] font-light pl-2">
-            +994515731906
+            {data.phone}
           </span>
         </li>
         <li className="flex items-center mx-0 my-4 h-[2.7rem]">
@@ -29,7 +44,7 @@ const ContactInfo: React.FC = () => {
             <FaHouseChimney />
           </span>
           <span className="text-white text-[1.2rem] font-light pl-2">
-            Bakı ş. Suraxanı r. Bül-Bülə qəsəbəsi
+            {data.address}
           </span>
         </li>
       </ul>

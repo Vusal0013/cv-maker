@@ -1,21 +1,43 @@
 import React from "react";
+import { EducationalInfoItem } from ".";
+import useDataFiller from "../../hooks/useDataFiller";
 
 const EducationInfo: React.FC = () => {
+  // const placeholderData = useAppSelector((state) => {
+  //   if (state.form.onDemo) {
+  //     return state.form.placeholderData.personalInfo.educationHistory;
+  //   } else {
+  //     return (
+  //       state.form.userData?.personalInfo.educationHistory ??
+  //       state.form.placeholderData.personalInfo.educationHistory
+  //     );
+  //   }
+  // });
+  const data = useDataFiller((data) => data.personalInfo.educationHistory);
   return (
     <div className="pt-12">
       <h3 className="text-white uppercase font-semibold tracking-[0.1rem] mb-8 text-[1.872rem]">
         Təhsil
       </h3>
       <ul>
-        <li className="mb-6">
-          <h5 className="text-[#03a9f4] font-medium text-[1.328rem]">
-            2022 - 2023
-          </h5>
-          <h4 className="text-white font-medium italic">
-            IT Academy (Algoritmica)
-          </h4>
-          <h4 className="text-white font-extralight italic">Web Developer</h4>
-        </li>
+        {Array.isArray(data) ? (
+          data.map((item) => (
+            <EducationalInfoItem
+              startDate={item.startDate}
+              endDate={item.endDate}
+              profession={item.profession}
+              university={item.university}
+              key={item.startDate + item.endDate}
+            />
+          ))
+        ) : (
+          <EducationalInfoItem
+            startDate={data.startDate}
+            endDate={data.endDate}
+            profession={data.profession}
+            university={data.university}
+          />
+        )}
       </ul>
     </div>
   );
