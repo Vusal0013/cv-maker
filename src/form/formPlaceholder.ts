@@ -30,16 +30,19 @@ const formPlaceholder: IFormType = {
     languageSkills: [
       {
         language: "English",
-        proficiency: "Fluent",
+        proficiency: "100%",
       },
       {
         language: "Spanish",
-        proficiency: "Intermediate",
+        proficiency: "65%",
       },
     ],
   },
   professionalInfo: {
-    about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    about: [
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad tempora ipsa, tempore qui cum voluptate, sit repudiandae error reiciendis facere cupiditate, iste iusto doloribus! Ipsum mollitia doloribus voluptate deleniti quas nobis, laudantium dicta ea recusandae.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et ipsam tenetur quae ad consequatur aspernatur, distinctio esse harum consectetur officia ex facere dolor molestiae incidunt nemo quisquam nam eos aliquam vero! Aut quia voluptatum odio accusantium maiores assumenda, quisquam quae atque ducimus impedit aspernatur eum sequi voluptates eligendi odit qui.",
+    ],
     workExperience: [
       {
         startDate: "2018",
@@ -58,15 +61,15 @@ const formPlaceholder: IFormType = {
     skills: [
       {
         skillName: "JavaScript",
-        proficiency: "Advanced",
+        proficiency: "%91%",
       },
       {
         skillName: "React",
-        proficiency: "Expert",
+        proficiency: "100%",
       },
       {
         skillName: "Node.js",
-        proficiency: "Advanced",
+        proficiency: "85%",
       },
     ],
   },
