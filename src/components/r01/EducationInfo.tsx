@@ -13,15 +13,15 @@ const EducationInfo: React.FC = () => {
   //     );
   //   }
   // });
-  const data = useDataFiller((data) => data.personalInfo.educationHistory);
+  const { educationHistory } = useDataFiller((data) => data.personalInfo);
   return (
-    <div className="pt-12">
-      <h3 className="text-white uppercase font-semibold tracking-[0.1rem] mb-8 text-[1.872rem]">
-        Təhsil
+    <div className="pt-7">
+      <h3 className="text-white uppercase font-semibold tracking-wider mb-4 text-lg">
+        TƏHSİL
       </h3>
       <ul>
-        {Array.isArray(data) ? (
-          data.map((item) => (
+        {Array.isArray(educationHistory) ? (
+          educationHistory.map((item) => (
             <EducationalInfoItem
               startDate={item.startDate}
               endDate={item.endDate}
@@ -32,10 +32,10 @@ const EducationInfo: React.FC = () => {
           ))
         ) : (
           <EducationalInfoItem
-            startDate={data.startDate}
-            endDate={data.endDate}
-            profession={data.profession}
-            university={data.university}
+            startDate={educationHistory.startDate}
+            endDate={educationHistory.endDate}
+            profession={educationHistory.profession}
+            university={educationHistory.university}
           />
         )}
       </ul>
