@@ -61,7 +61,7 @@ const formPlaceholder: IFormType = {
     skills: [
       {
         skillName: "JavaScript",
-        proficiency: "%91%",
+        proficiency: "91%",
       },
       {
         skillName: "React",
