@@ -11,3 +11,5 @@ export { About } from "./About";
 export { AboutItem } from "./AboutItem";
 export { WorkExperience } from "./WorkExperience";
 export { WorkExperinceItem } from "./WorkExperinceItem";
+export { ProfessionalSkills } from "./ProfessionalSkills";
+export { ProfessionalSkillItem } from "./ProfessionalSkillItem";
