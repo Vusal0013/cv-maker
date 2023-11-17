@@ -1,6 +1,7 @@
 import React from "react";
 import useDataFiller from "../../hooks/useDataFiller";
 import { ProfessionalSkillItem } from ".";
+import {} from "react-icons/di";
 
 const ProfessionalSkills: React.FC = () => {
   const { skills } = useDataFiller((data) => data.professionalInfo);

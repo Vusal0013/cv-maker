@@ -1,5 +1,5 @@
 import React from "react";
-import { IProfessionalSkills } from "../../form/formType";
+import { IProfessionalSkills } from "../../types/";
 import { SkillsProficiency } from ".";
 
 const ProfessionalSkillItem: React.FC<IProfessionalSkills> = ({

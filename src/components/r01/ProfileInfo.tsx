@@ -14,8 +14,9 @@ const ProfileInfo: React.FC = () => {
         />
       </div>
       <h1 className="text-white text-2xl uppercase text-center font-semibold mt-5">
-        {profileInfo.fullname}
+        {profileInfo.firstName} {profileInfo.lastName}
       </h1>
+      <small className="text-[#ffffffaa]">{profileInfo.birthDate}</small>
       <h2 className="text-xl font-light text-white uppercase text-center mt-5">
         {profileInfo.profession}
       </h2>

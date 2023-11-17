@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IFormType } from "../form/formType";
-import formPlaceholder from "../form/formPlaceholder";
+import { IFormType } from "../types/formDataType";
+import formPlaceholder from "../formData/formPlaceholder";
 
 export interface IFormSliceState {
   onDemo: boolean;

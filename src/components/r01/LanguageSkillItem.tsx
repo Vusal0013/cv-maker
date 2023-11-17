@@ -1,6 +1,6 @@
 import React from "react";
 import { SkillsProficiency } from ".";
-import { ILanguageSkill } from "../../form/formType";
+import { ILanguageSkill } from "../../types/";
 
 const LanguageSkillItem: React.FC<ILanguageSkill> = ({
   language,

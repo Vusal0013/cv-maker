@@ -1,5 +1,5 @@
 import React from "react";
-import { IWorkExperience } from "../../form/formType";
+import { IWorkExperience } from "../../types/formDataType";
 
 const WorkExperinceItem: React.FC<IWorkExperience> = ({
   company,

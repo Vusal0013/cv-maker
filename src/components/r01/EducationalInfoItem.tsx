@@ -1,5 +1,5 @@
 import React from "react";
-import { IEducation } from "../../form/formType";
+import { IEducation } from "../../types/";
 
 const EducationalInfoItem: React.FC<IEducation> = ({
   profession,

@@ -1,5 +1,5 @@
 import { useAppSelector } from "../store/hooks";
-import { IFormType } from "../form/formType";
+import { IFormType } from "../types/formDataType";
 
 type InfoGetter<T> = (data: IFormType) => T;
 
