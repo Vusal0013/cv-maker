@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { ErrorMessage, FieldHookConfig, useField } from "formik";
-import { InputError } from "./";
-import { BiSolidErrorCircle, BiSolidCheckCircle } from "react-icons/bi";
-import classNames from "classnames";
+import { InputAnimation, InputError } from ".";
 
 export type IInput = {
   label?: string;
@@ -33,31 +31,15 @@ const Input: React.FC<IInput & FieldHookConfig<any>> = ({
           {...field}
           value={props.value}
           onFocus={() => setInputFocus(true)}
-          onBlur={() => setInputFocus(false)}
+          onBlurCapture={() => setInputFocus(false)}
         />
-        {meta.touched && (
-          <div
-            className={classNames({
-              "absolute right-0 top-0 h-full w-9 flex justify-center items-center text-lg":
-                true,
-              "text-[#cf4343]": meta.error,
-              "text-[#60af68]": !meta.error,
-            })}
-          >
-            {meta.error ? <BiSolidErrorCircle /> : <BiSolidCheckCircle />}
-          </div>
-        )}
-        <div
-          className={classNames({
-            "w-0 h-0.5 absolute left-0 -bottom-1 transition-all duration-500":
-              true,
-            "bg-[#cf4343]": meta.error,
-            "bg-[#60af68]": !meta.error,
-            "w-full": inputFocus,
-          })}
-        />
+        <InputAnimation meta={meta} focus={inputFocus} />
       </div>
-      <ErrorMessage name={field.name} component={InputError} />
+
+      <ErrorMessage
+        name={field.name}
+        children={(m) => <InputError children={m} />}
+      />
     </div>
   );
 };
