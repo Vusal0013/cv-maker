@@ -10,6 +10,9 @@ import {
   IMonthName,
   IOpenState,
 } from "../../types";
+import { useFormikContext } from "formik";
+import classNames from "classnames";
+import { BiSolidCheckCircle, BiSolidErrorCircle } from "react-icons/bi";
 
 const getLast100Years = (date: Dayjs): string[] => {
   const last_100_Year: string[] = [];
@@ -38,13 +41,15 @@ const getDayLength = (length: string): string[] => {
   return Array.from({ length: Number(length) }, (_, index) => String(++index));
 };
 
-const BirthDate: React.FC<IFormType> = (values) => {
+const BirthDate: React.FC = () => {
   const [date, setDate] = useState<IBirthDateState>({
     daysInMonth: getDayLength(String(dayjs().daysInMonth())),
-    day: dayjs().date().toString(),
-    month: monthName[dayjs().month()],
-    year: dayjs().year().toString(),
+    day: "Gün",
+    month: "Ay",
+    year: "İl",
   });
+
+  const formik = useFormikContext<IFormType>();
 
   const [open, setOpen] = useState<IOpenState>({
     day: false,
@@ -57,28 +62,24 @@ const BirthDate: React.FC<IFormType> = (values) => {
   const yearRef = useRef<IBirthDateInputRef>(null);
 
   const handleSetOpen = (thisOpen?: IBDayInput) => {
-    switch (thisOpen) {
-      case "day":
-        return { day: true, month: false, year: false };
-      case "month":
-        return { day: false, month: true, year: false };
-      case "year":
-        return { day: false, month: false, year: true };
-      default:
-        return { day: false, month: false, year: false };
-    }
+    setOpen({
+      day: !open.day && thisOpen === "day",
+      month: !open.month && thisOpen === "month",
+      year: !open.year && thisOpen === "year",
+    });
   };
-
   const handleClickSetDate = (type: IBDayInput, value: string) => {
     const handleSetDayInMount = (
       month: IMonthName[],
       prevState: IBirthDateState
     ) => {
+      const year = prevState.year === "İl" ? dayjs().year() : prevState.year;
+
       switch (type) {
         case "month":
           return String(
             dayjs(
-              prevState.year + String(month.indexOf(value as IMonthName) + 1)
+              year + String(month.indexOf(value as IMonthName) + 1)
             ).daysInMonth()
           );
         case "year":
@@ -105,6 +106,15 @@ const BirthDate: React.FC<IFormType> = (values) => {
   };
 
   useEffect(() => {
+    formik.setFieldValue("personalInfo.profileInfo.birthDate.day", date.day);
+    formik.setFieldValue(
+      "personalInfo.profileInfo.birthDate.month",
+      date.month
+    );
+    formik.setFieldValue("personalInfo.profileInfo.birthDate.year", date.year);
+  }, [date]);
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         (open.day || open.month || open.year) &&
@@ -114,7 +124,7 @@ const BirthDate: React.FC<IFormType> = (values) => {
           yearRef.current?.contains(event.target as HTMLElement)
         )
       ) {
-        setOpen(handleSetOpen());
+        handleSetOpen();
       }
     };
 
@@ -123,47 +133,55 @@ const BirthDate: React.FC<IFormType> = (values) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [open]);
-  console.log(values);
 
   return (
-    <div className="flex gap-2 w-64 justify-between">
-      {values.personalInfo.profileInfo.birthDate && (
-        <>
-          <BirthDateInput
-            name="values.personalInfo.profileInfo.birthDate?.day"
-            ref={dayRef}
-            date={date}
-            setOpen={setOpen}
-            handleClickSetDate={handleClickSetDate}
-            handleSetOpen={handleSetOpen}
-            iterableArray={date.daysInMonth}
-            open={open}
-            dataType="day"
-          />
-          <BirthDateInput
-            name="values.personalInfo.profileInfo.birthDate.month"
-            ref={monthRef}
-            date={date}
-            setOpen={setOpen}
-            handleClickSetDate={handleClickSetDate}
-            handleSetOpen={handleSetOpen}
-            iterableArray={monthName}
-            open={open}
-            dataType="month"
-          />
-          <BirthDateInput
-            name="values.personalInfo.profileInfo.birthDate.year"
-            ref={yearRef}
-            date={date}
-            setOpen={setOpen}
-            handleClickSetDate={handleClickSetDate}
-            handleSetOpen={handleSetOpen}
-            iterableArray={getLast100Years(dayjs())}
-            open={open}
-            dataType="year"
-          />
-        </>
-      )}
+    <div className="flex gap-2 w-60 justify-between relative">
+      <BirthDateInput
+        ref={dayRef}
+        date={date}
+        handleClickSetDate={handleClickSetDate}
+        handleSetOpen={handleSetOpen}
+        iterableArray={date.daysInMonth}
+        open={open}
+        dataType="day"
+      />
+      <BirthDateInput
+        ref={monthRef}
+        date={date}
+        handleClickSetDate={handleClickSetDate}
+        handleSetOpen={handleSetOpen}
+        iterableArray={monthName}
+        open={open}
+        disabled={date.day === "Gün"}
+        dataType="month"
+      />
+      <BirthDateInput
+        ref={yearRef}
+        date={date}
+        handleClickSetDate={handleClickSetDate}
+        handleSetOpen={handleSetOpen}
+        iterableArray={getLast100Years(dayjs())}
+        open={open}
+        disabled={date.month === "Ay"}
+        dataType="year"
+      />
+
+      <div
+        className={classNames({
+          "absolute -right-8 top-0 h-full w-9 flex justify-center items-center text-lg":
+            true,
+          "text-[#cf4343]":
+            date.day === "Gün" || date.month === "Ay" || date.year === "İl",
+          "text-[#60af68]":
+            date.day !== "Gün" && date.month !== "Ay" && date.year !== "İl",
+        })}
+      >
+        {date.day === "Gün" || date.month === "Ay" || date.year === "İl" ? (
+          <BiSolidErrorCircle />
+        ) : (
+          <BiSolidCheckCircle />
+        )}
+      </div>
     </div>
   );
 };
