@@ -1,17 +1,21 @@
 import { IMonthName } from ".";
 
 export interface IBirthDate {
-  day: string;
-  month: IMonthName;
-  year: string;
+  day?: string;
+  month?: IMonthName;
+  year?: string;
+  isRequired: boolean;
 }
 
 export interface IProfileInfo {
-  profilePhoto?: string;
+  profilePhoto?: {
+    src?: string;
+    isRequired: boolean;
+  };
   firstName: string;
   lastName: string;
   profession?: string;
-  birthDate?: IBirthDate;
+  birthDate: IBirthDate;
 }
 export interface IContactInfo {
   email: string;
@@ -22,6 +26,7 @@ export interface IContactInfo {
 export interface IEducation {
   startDate: string;
   endDate?: string;
+  currentlyEdu?: boolean;
   university: string;
   profession?: string;
 }
@@ -41,6 +46,7 @@ export interface IPersonalInfo {
 export interface IWorkExperience {
   startDate: string;
   endDate?: string;
+  currentlyWork?: boolean;
   company: string;
   profession: string;
   responsibilities: string;

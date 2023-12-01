@@ -4,11 +4,15 @@ import profilePhoto from "../assets/r01/ProfilePhoto.png";
 const formPlaceholder: IFormType = {
   personalInfo: {
     profileInfo: {
-      profilePhoto: profilePhoto,
+      profilePhoto: {
+        src: profilePhoto,
+        isRequired: true,
+      },
       firstName: "John",
       lastName: "Doe",
       profession: "Software Developer",
       birthDate: {
+        isRequired: true,
         day: "24",
         month: "Yanvar",
         year: "1996",

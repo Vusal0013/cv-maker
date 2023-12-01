@@ -25,20 +25,17 @@ export type IMonthName =
   | "Sentyabr"
   | "Oktyabr"
   | "Noyabr"
-  | "Dekabr";
+  | "Dekabr"
+  | "Ay";
 
 export type IBirthDateInputRef = HTMLDivElement;
 
 export interface IBirthDateInput {
   dataType: IBDayInput;
   open: IOpenState;
-  setOpen: React.Dispatch<React.SetStateAction<IOpenState>>;
   iterableArray: IMonthName[] | string[];
-  handleSetOpen: (thisOpen?: IBDayInput) => {
-    day: boolean;
-    month: boolean;
-    year: boolean;
-  };
+  handleSetOpen: (thisOpen?: IBDayInput) => void;
   date: IBirthDateState;
+  disabled?: boolean;
   handleClickSetDate: (type: IBDayInput, value: string) => void;
 }
