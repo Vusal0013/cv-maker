@@ -36,8 +36,8 @@ export interface ILanguageSkill {
 export interface IPersonalInfo {
   profileInfo: IProfileInfo;
   contactInfo: IContactInfo;
-  educationHistory: IEducation | IEducation[];
-  languageSkills: ILanguageSkill | ILanguageSkill[];
+  educationHistory: IEducation[];
+  languageSkills: ILanguageSkill[];
 }
 
 export interface IWorkExperience {
@@ -56,8 +56,8 @@ export interface IProfessionalSkills {
 
 export interface IProfessionalInfo {
   about: string[];
-  workExperience: IWorkExperience | IWorkExperience[];
-  skills: IProfessionalSkills | IProfessionalSkills[];
+  workExperience: IWorkExperience[];
+  skills: IProfessionalSkills[];
 }
 
 export type ICompletedStep = { [key: number]: boolean };
