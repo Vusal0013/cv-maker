@@ -1,26 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
-import dayjs, { Dayjs } from "dayjs";
-import { BirthDateInput } from "./";
+import React, { useEffect, useState } from "react";
 
-import {
-  IBDayInput,
-  IBirthDateInputRef,
-  IBirthDateState,
-  IFormType,
-  IMonthName,
-  IOpenState,
-} from "../../types";
-import { useFormikContext } from "formik";
-import classNames from "classnames";
-import { BiSolidCheckCircle, BiSolidErrorCircle } from "react-icons/bi";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./react-datepicker.css";
 
-const getLast100Years = (date: Dayjs): string[] => {
-  const last_100_Year: string[] = [];
-  for (let year = date.year() - 100; year <= date.year(); year++) {
-    last_100_Year.unshift(String(year));
-  }
-  return last_100_Year;
-};
+import { ErrorMessage, FieldHookConfig, useField } from "formik";
+import { IMonthName } from "../../types";
+import { InputAnimation, InputError } from ".";
+
+const monthsName: IMonthName[] = [
+  "Yanvar",
+  "Fevral",
+  "Mart",
+  "Aprel",
+  "May",
+  "Iyun",
+  "Iyul",
+  "Avqust",
+  "Sentyabr",
+  "Oktyabr",
+  "Noyabr",
+  "Dekabr",
+];
 
 const monthName: IMonthName[] = [
   "Yanvar",
@@ -37,151 +38,65 @@ const monthName: IMonthName[] = [
   "Dekabr",
 ];
 
-const getDayLength = (length: string): string[] => {
-  return Array.from({ length: Number(length) }, (_, index) => String(++index));
-};
+const BirthDate: React.FC<{ placeholder?: string } & FieldHookConfig<any>> = ({
+  ...props
+}) => {
+  const [field, meta, helpers] = useField(props);
 
-const BirthDate: React.FC = () => {
-  const [date, setDate] = useState<IBirthDateState>({
-    daysInMonth: getDayLength(String(dayjs().daysInMonth())),
-    day: "Gün",
-    month: "Ay",
-    year: "İl",
-  });
+  const stringToDate = (str: string | null) => {
+    if (str) {
+      const [day, month, year] = str && str.split(" ");
 
-  const formik = useFormikContext<IFormType>();
+      const monthNumber = monthsName.indexOf(month as IMonthName) + 1;
 
-  const [open, setOpen] = useState<IOpenState>({
-    day: false,
-    month: false,
-    year: false,
-  });
-
-  const dayRef = useRef<IBirthDateInputRef>(null);
-  const monthRef = useRef<IBirthDateInputRef>(null);
-  const yearRef = useRef<IBirthDateInputRef>(null);
-
-  const handleSetOpen = (thisOpen?: IBDayInput) => {
-    setOpen({
-      day: !open.day && thisOpen === "day",
-      month: !open.month && thisOpen === "month",
-      year: !open.year && thisOpen === "year",
-    });
+      return new Date(`${monthNumber}.${day}.${year}`);
+    } else return null;
   };
-  const handleClickSetDate = (type: IBDayInput, value: string) => {
-    const handleSetDayInMount = (
-      month: IMonthName[],
-      prevState: IBirthDateState
-    ) => {
-      const year = prevState.year === "İl" ? dayjs().year() : prevState.year;
 
-      switch (type) {
-        case "month":
-          return String(
-            dayjs(
-              year + String(month.indexOf(value as IMonthName) + 1)
-            ).daysInMonth()
-          );
-        case "year":
-          return String(
-            dayjs(
-              value + String(month.indexOf(prevState.month) + 1)
-            ).daysInMonth()
-          );
-        default:
-          return prevState.daysInMonth[prevState.daysInMonth.length - 1];
-      }
-    };
+  const dateToString = (date: Date | null) => {
+    if (date) {
+      const [day, monthNumber, year] = date.toLocaleDateString("ru").split(".");
 
-    setDate((prev) => ({
-      ...prev,
-      daysInMonth: getDayLength(handleSetDayInMount(monthName, prev)),
-      day:
-        prev.day <=
-        String(getDayLength(handleSetDayInMount(monthName, prev)).length)
-          ? prev.day
-          : String(getDayLength(handleSetDayInMount(monthName, prev)).length),
-      [type]: value,
-    }));
+      const stringDate = `${day} ${monthName[Number(monthNumber) - 1]} ${year}`;
+
+      return stringDate;
+    } else return null;
   };
+
+  const [date, setDate] = useState<Date | null>(stringToDate(field.value));
+
+  const [focus, setFocus] = useState<boolean>(false);
 
   useEffect(() => {
-    formik.setFieldValue("personalInfo.profileInfo.birthDate.day", date.day);
-    formik.setFieldValue(
-      "personalInfo.profileInfo.birthDate.month",
-      date.month
-    );
-    formik.setFieldValue("personalInfo.profileInfo.birthDate.year", date.year);
+    if (date) helpers.setValue(dateToString(date) ?? "");
   }, [date]);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        (open.day || open.month || open.year) &&
-        !(
-          dayRef.current?.contains(event.target as HTMLElement) ||
-          monthRef.current?.contains(event.target as HTMLElement) ||
-          yearRef.current?.contains(event.target as HTMLElement)
-        )
-      ) {
-        handleSetOpen();
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [open]);
-
   return (
-    <div className="flex gap-2 w-60 justify-between relative">
-      <BirthDateInput
-        ref={dayRef}
-        date={date}
-        handleClickSetDate={handleClickSetDate}
-        handleSetOpen={handleSetOpen}
-        iterableArray={date.daysInMonth}
-        open={open}
-        dataType="day"
+    <div className="relative">
+      <DatePicker
+        onFocus={() => setFocus((prev) => !prev)}
+        onBlur={() => {
+          setFocus((prev) => !prev), !meta.touched && helpers.setTouched(true);
+        }}
+        onChange={(date) => setDate(date)}
+        dateFormat={"dd.MM.yyyy"}
+        dropdownMode="scroll"
+        showMonthDropdown
+        useShortMonthInDropdown
+        showYearDropdown
+        yearDropdownItemNumber={100}
+        scrollableYearDropdown
+        className="w-full pr-6 py-1 px-2 bg-gray-50 text-[#2e2e2e] border-2 outline-none border-[#cdcdcd] text-center"
+        wrapperClassName="w-full"
+        placeholderText="Doğum tarixi"
+        selected={date}
+        maxDate={new Date()}
+        calendarStartDay={1}
       />
-      <BirthDateInput
-        ref={monthRef}
-        date={date}
-        handleClickSetDate={handleClickSetDate}
-        handleSetOpen={handleSetOpen}
-        iterableArray={monthName}
-        open={open}
-        disabled={date.day === "Gün"}
-        dataType="month"
+      <InputAnimation focus={focus} meta={meta} />
+      <ErrorMessage
+        name={field.name}
+        children={(m) => <InputError children={m} />}
       />
-      <BirthDateInput
-        ref={yearRef}
-        date={date}
-        handleClickSetDate={handleClickSetDate}
-        handleSetOpen={handleSetOpen}
-        iterableArray={getLast100Years(dayjs())}
-        open={open}
-        disabled={date.month === "Ay"}
-        dataType="year"
-      />
-
-      <div
-        className={classNames({
-          "absolute -right-8 top-0 h-full w-9 flex justify-center items-center text-lg":
-            true,
-          "text-[#cf4343]":
-            date.day === "Gün" || date.month === "Ay" || date.year === "İl",
-          "text-[#60af68]":
-            date.day !== "Gün" && date.month !== "Ay" && date.year !== "İl",
-        })}
-      >
-        {date.day === "Gün" || date.month === "Ay" || date.year === "İl" ? (
-          <BiSolidErrorCircle />
-        ) : (
-          <BiSolidCheckCircle />
-        )}
-      </div>
     </div>
   );
 };
