@@ -3,22 +3,18 @@ import * as yup from "yup";
 export const validationSchema = yup.object().shape({
   personalInfo: yup.object().shape({
     profileInfo: yup.object().shape({
+      profilePhoto: yup.object().shape({
+        src: yup.string().when("isRequired", {
+          is: true,
+          then() {
+            return yup.string().required("Bu alan gereklidir.");
+          },
+        }),
+      }),
       firstName: yup.string().required("Bu alan gereklidir."),
       lastName: yup.string().required("Bu alan gereklidir."),
       birthDate: yup.object().shape({
-        day: yup.string().when("isRequired", {
-          is: true,
-          then() {
-            return yup.string().required("Bu alan gereklidir.");
-          },
-        }),
-        month: yup.string().when("isRequired", {
-          is: true,
-          then() {
-            return yup.string().required("Bu alan gereklidir.");
-          },
-        }),
-        year: yup.string().when("isRequired", {
+        date: yup.string().when("isRequired", {
           is: true,
           then() {
             return yup.string().required("Bu alan gereklidir.");
@@ -37,6 +33,15 @@ export const validationSchema = yup.object().shape({
       yup.object().shape({
         startDate: yup.string().required("Bu alan gereklidir."),
         university: yup.string().required("Bu alan gereklidir."),
+        endDate: yup.string().when("currently", {
+          is: false,
+          then(schema) {
+            return schema.required("Bu alan gereklidir.");
+          },
+          otherwise(schema) {
+            return schema.optional();
+          },
+        }),
       })
     ),
     languageSkills: yup.array().of(
@@ -54,6 +59,15 @@ export const validationSchema = yup.object().shape({
         company: yup.string().required("Bu alan gereklidir."),
         profession: yup.string().required("Bu alan gereklidir."),
         responsibilities: yup.string().required("Bu alan gereklidir."),
+        endDate: yup.string().when("currently", {
+          is: false,
+          then(schema) {
+            return schema.required("Bu alan gereklidir.");
+          },
+          otherwise(schema) {
+            return schema.optional();
+          },
+        }),
       })
     ),
     skills: yup.array().of(

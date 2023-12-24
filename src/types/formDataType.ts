@@ -1,14 +1,11 @@
-import { IMonthName } from ".";
-
 export interface IBirthDate {
-  day?: string;
-  month?: IMonthName;
-  year?: string;
+  date?: string;
   isRequired: boolean;
 }
 
 export interface IProfileInfo {
   profilePhoto?: {
+    file?: File | null;
     src?: string;
     isRequired: boolean;
   };
@@ -26,7 +23,7 @@ export interface IContactInfo {
 export interface IEducation {
   startDate: string;
   endDate?: string;
-  currentlyEdu?: boolean;
+  currently: boolean;
   university: string;
   profession?: string;
 }
@@ -39,16 +36,16 @@ export interface ILanguageSkill {
 export interface IPersonalInfo {
   profileInfo: IProfileInfo;
   contactInfo: IContactInfo;
-  educationHistory: IEducation | IEducation[];
-  languageSkills: ILanguageSkill | ILanguageSkill[];
+  educationHistory: IEducation[];
+  languageSkills: ILanguageSkill[];
 }
 
 export interface IWorkExperience {
   startDate: string;
   endDate?: string;
-  currentlyWork?: boolean;
+  currently: boolean;
   company: string;
-  profession: string;
+  profession?: string;
   responsibilities: string;
 }
 
@@ -58,11 +55,19 @@ export interface IProfessionalSkills {
 }
 
 export interface IProfessionalInfo {
-  about: string | string[];
-  workExperience: IWorkExperience | IWorkExperience[];
-  skills: IProfessionalSkills | IProfessionalSkills[];
+  about: string[];
+  workExperience: IWorkExperience[];
+  skills: IProfessionalSkills[];
 }
+
+export type ICompletedStep = { [key: number]: boolean };
+
 export interface IFormType {
+  stepper?: {
+    steps: number;
+    currentStep: number;
+    completedStep: ICompletedStep;
+  };
   personalInfo: IPersonalInfo;
   professionalInfo: IProfessionalInfo;
 }

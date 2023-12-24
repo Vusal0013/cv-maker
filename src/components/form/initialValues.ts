@@ -1,9 +1,26 @@
 import { IFormType } from "../../types";
 
 export const initialValues: IFormType = {
+  //steps
+  stepper: {
+    completedStep: {
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+    },
+    currentStep: 1,
+    steps: 4,
+  },
+  //steps
+
+  // şəxsi məlumatlar
+  // step 1-2
   personalInfo: {
+    // step 1
     profileInfo: {
       profilePhoto: {
+        file: null,
         src: "",
         isRequired: true,
       },
@@ -12,9 +29,7 @@ export const initialValues: IFormType = {
       profession: "",
       birthDate: {
         isRequired: true,
-        day: "",
-        month: "Yanvar",
-        year: "",
+        date: "",
       },
     },
     contactInfo: {
@@ -22,18 +37,14 @@ export const initialValues: IFormType = {
       phone: "",
       address: "",
     },
+    // step 2
     educationHistory: [
       {
         startDate: "",
         endDate: "",
         university: "",
         profession: "",
-      },
-      {
-        startDate: "",
-        endDate: "",
-        university: "",
-        profession: "",
+        currently: false,
       },
     ],
     languageSkills: [
@@ -41,14 +52,14 @@ export const initialValues: IFormType = {
         language: "",
         proficiency: "",
       },
-      {
-        language: "",
-        proficiency: "",
-      },
     ],
   },
+  // iş məlumatları
+  // step 3-4
   professionalInfo: {
-    about: ["", ""],
+    // step 3
+    about: [""],
+    // step 4
     workExperience: [
       {
         startDate: "",
@@ -56,23 +67,10 @@ export const initialValues: IFormType = {
         company: "",
         profession: "",
         responsibilities: "",
-      },
-      {
-        startDate: "",
-        company: "",
-        profession: "",
-        responsibilities: "",
+        currently: false,
       },
     ],
     skills: [
-      {
-        skillName: "",
-        proficiency: "",
-      },
-      {
-        skillName: "",
-        proficiency: "",
-      },
       {
         skillName: "",
         proficiency: "",
