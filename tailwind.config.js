@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -6,7 +7,11 @@ export default {
       r01: ["Poppins", "sans-serif"],
       form: ["Work Sans", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        form: 'url("./src/assets/form/background-image.jpg")',
+      },
+    },
   },
   plugins: [],
 };
