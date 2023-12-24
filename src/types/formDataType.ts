@@ -23,7 +23,7 @@ export interface IContactInfo {
 export interface IEducation {
   startDate: string;
   endDate?: string;
-  currently: boolean;
+  currently?: boolean;
   university: string;
   profession?: string;
 }
@@ -36,8 +36,8 @@ export interface ILanguageSkill {
 export interface IPersonalInfo {
   profileInfo: IProfileInfo;
   contactInfo: IContactInfo;
-  educationHistory: IEducation[];
-  languageSkills: ILanguageSkill[];
+  educationHistory: IEducation | IEducation[];
+  languageSkills: ILanguageSkill | ILanguageSkill[];
 }
 
 export interface IWorkExperience {
@@ -56,8 +56,8 @@ export interface IProfessionalSkills {
 
 export interface IProfessionalInfo {
   about: string[];
-  workExperience: IWorkExperience[];
-  skills: IProfessionalSkills[];
+  workExperience: IWorkExperience | IWorkExperience[];
+  skills: IProfessionalSkills | IProfessionalSkills[];
 }
 
 export type ICompletedStep = { [key: number]: boolean };
