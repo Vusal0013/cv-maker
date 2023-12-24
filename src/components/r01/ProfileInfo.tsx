@@ -17,10 +17,7 @@ const ProfileInfo: React.FC = () => {
         {profileInfo.firstName} {profileInfo.lastName}
       </h1>
       {profileInfo.birthDate.isRequired && (
-        <small className="text-[#ffffffaa]">
-          {profileInfo.birthDate.day} {profileInfo.birthDate.month}{" "}
-          {profileInfo.birthDate.year}
-        </small>
+        <small className="text-[#ffffffaa]">{profileInfo.birthDate.date}</small>
       )}
       <h2 className="text-xl font-light text-white uppercase text-center mt-5">
         {profileInfo.profession}

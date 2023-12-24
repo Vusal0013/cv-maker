@@ -11,21 +11,13 @@ const LanguageSkills: React.FC = () => {
         DİL BİLİKLƏRİ
       </h3>
       <ul>
-        {Array.isArray(languageSkills) ? (
-          languageSkills.map(({ language, proficiency }) => (
-            <LanguageSkillItem
-              key={language + proficiency}
-              language={language}
-              proficiency={proficiency}
-            />
-          ))
-        ) : (
+        {languageSkills.map(({ language, proficiency }) => (
           <LanguageSkillItem
-            key={languageSkills.language + languageSkills.proficiency}
-            language={languageSkills.language}
-            proficiency={languageSkills.proficiency}
+            key={language + proficiency}
+            language={language}
+            proficiency={proficiency}
           />
-        )}
+        ))}
       </ul>
     </div>
   );

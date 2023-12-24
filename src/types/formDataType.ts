@@ -43,7 +43,7 @@ export interface IPersonalInfo {
 export interface IWorkExperience {
   startDate: string;
   endDate?: string;
-  currently: boolean;
+  currently?: boolean;
   company: string;
   profession?: string;
   responsibilities: string;

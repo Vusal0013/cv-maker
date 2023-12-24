@@ -11,20 +11,13 @@ const ProfessionalSkills: React.FC = () => {
       <h2 className="text-[#003147] text-2xl font-bold uppercase tracking-wider mb-7">
         BİLİKLƏR
       </h2>
-      {Array.isArray(skills) ? (
-        skills.map(({ proficiency, skillName }) => (
-          <ProfessionalSkillItem
-            key={proficiency + skillName}
-            proficiency={proficiency}
-            skillName={skillName}
-          />
-        ))
-      ) : (
+      {skills.map(({ proficiency, skillName }) => (
         <ProfessionalSkillItem
-          proficiency={skills.proficiency}
-          skillName={skills.skillName}
+          key={proficiency + skillName}
+          proficiency={proficiency}
+          skillName={skillName}
         />
-      )}
+      ))}
     </div>
   );
 };
