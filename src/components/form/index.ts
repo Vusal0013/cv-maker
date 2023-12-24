@@ -7,6 +7,10 @@ export { PhotoFile } from "./PhotoFile";
 export { ResumeForm } from "./ResumeForm";
 export { Checkbox } from "./Checkbox";
 export { InputAnimation } from "./InputAnimation";
+export { Experience } from "./Experience";
+export { ExperienceItem } from "./ExperienceItem";
+export { Textarea } from "./Textarea";
+export { DatePicker } from "./DatePicker";
 
 //Yup Validation schema
 export { validationSchema } from "./validationSchema";
