@@ -1,3 +1,7 @@
+import { FormikErrors } from "formik";
+import { ICompletedStep, IFormType } from "../..";
+
+// Form
 export interface IBirthDateState {
   daysInMonth: string[];
   day: string;
@@ -6,7 +10,7 @@ export interface IBirthDateState {
 }
 
 export interface IOpenState {
-  day: boolean;
+  day?: boolean;
   month: boolean;
   year: boolean;
 }
@@ -39,3 +43,25 @@ export interface IBirthDateInput {
   disabled?: boolean;
   handleClickSetDate: (type: IBDayInput, value: string) => void;
 }
+
+// Form
+
+// Stepper
+export interface IStepperHeader {
+  steps: number;
+  currentStep: number;
+  completedStep: ICompletedStep;
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => Promise<void | FormikErrors<IFormType>>;
+}
+
+export interface IStepper {
+  Header: React.FC<IStepperHeader>;
+  Step: React.FC<{
+    children: React.ReactNode;
+  }>;
+}
+// Stepper
