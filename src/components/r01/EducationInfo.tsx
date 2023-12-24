@@ -20,24 +20,15 @@ const EducationInfo: React.FC = () => {
         TƏHSİL
       </h3>
       <ul>
-        {Array.isArray(educationHistory) ? (
-          educationHistory.map((item) => (
-            <EducationalInfoItem
-              startDate={item.startDate}
-              endDate={item.endDate}
-              profession={item.profession}
-              university={item.university}
-              key={item.startDate + item.endDate}
-            />
-          ))
-        ) : (
+        {educationHistory.map((item) => (
           <EducationalInfoItem
-            startDate={educationHistory.startDate}
-            endDate={educationHistory.endDate}
-            profession={educationHistory.profession}
-            university={educationHistory.university}
+            startDate={item.startDate}
+            endDate={item.endDate}
+            profession={item.profession}
+            university={item.university}
+            key={item.startDate + item.endDate}
           />
-        )}
+        ))}
       </ul>
     </div>
   );
