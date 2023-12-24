@@ -8,6 +8,7 @@ export type {
   IProfessionalSkills,
   IProfileInfo,
   IWorkExperience,
+  ICompletedStep,
 } from "./formDataType";
 
 export type {
@@ -17,4 +18,6 @@ export type {
   IBirthDateState,
   IMonthName,
   IOpenState,
+  IStepperHeader,
+  IStepper,
 } from "./components/form/types";
