@@ -16,7 +16,7 @@ const Checkbox: React.FC<ICheckbox & FieldHookConfig<any>> = ({
     helpers.setValue(!field.value);
   };
   return (
-    <div className="flex justify-between w-max gap-2 items-center">
+    <div className="flex justify-start w-full gap-2 items-center">
       <div
         onClick={handleSetVal}
         className="bg-white w-5 h-5 flex justify-center items-center border-[cdcdcd] border-2 text-[#2e2e2e]"
