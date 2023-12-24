@@ -37,7 +37,7 @@ const BirthDateInput = React.forwardRef<IBirthDateInputRef, IBirthDateInput>(
           {date[dataType]}
         </div>
         {open[dataType] && (
-          <div className="absolute w-full h-32 mt-1.5 overflow-y-scroll scroll-smooth">
+          <div className="absolute w-full h-32 mt-1.5 overflow-y-scroll overflow-x-hidden scroll-smooth">
             {iterableArray.map((item, i) => {
               return (
                 <div
