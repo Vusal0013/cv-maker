@@ -28,7 +28,7 @@ const InputAnimation: React.FC<IInputAnimation> = ({ meta, focus }) => {
       )}
       <div
         className={classNames({
-          "w-0 h-0.5 absolute left-0 -bottom-1 transition-all duration-500":
+          "w-0 h-0.5 absolute left-0 -bottom-0.5 transition-all duration-500":
             true,
           "bg-[#cf4343] w-full": meta.touched && meta.error,
           "bg-[#60af68]": !meta.error || focus,
