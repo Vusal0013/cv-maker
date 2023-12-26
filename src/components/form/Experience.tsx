@@ -48,15 +48,15 @@ const Experience: React.FC<IExperience> = ({
   return (
     <div>
       <FieldArray name={`${fieldName}`}>
-        {({ remove, handlePush, name, form }) => {
+        {({ handleRemove, handlePush, name, form }) => {
           return (
-            <div className="w-full flex flex-col justify-center items-center gap-2.5">
+            <div className="w-full flex flex-col justify-center items-center gap-3">
               {values.map((fieldValue, i) => (
                 <ExperienceItem
                   getFieldMeta={getFieldMeta}
                   getFieldHelpers={getFieldHelpers}
                   getFieldProps={getFieldProps}
-                  remove={remove}
+                  handleRemove={handleRemove}
                   key={fieldValue.startDate + String(i)}
                   formValues={form}
                   fieldName={name}
@@ -66,19 +66,13 @@ const Experience: React.FC<IExperience> = ({
                   lastIndex={values.length - 1}
                 />
               ))}
-
-              <div className="w-1/2">
-                <button
-                  type="button"
-                  onClick={handlePush<IEducation | IWorkExperience>(pushedData)}
-                  className="w-full pr-6 py-1 px-2 bg-gray-50 text-[#2e2e2e] border-2 outline-none border-[#cdcdcd]"
-                >
-                  Əlavə et
-                </button>
-                <button className="w-full pr-6 py-1 px-2 bg-gray-50 text-[#2e2e2e] border-2 outline-none border-[#cdcdcd]">
-                  Test Submit
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={handlePush<IEducation | IWorkExperience>(pushedData)}
+                className="w-full pr-6 py-1 px-2 bg-gray-50 text-[#2e2e2e] border-2 outline-none border-[#cdcdcd]"
+              >
+                Əlavə et
+              </button>
             </div>
           );
         }}
