@@ -11,6 +11,8 @@ export { Experience } from "./Experience";
 export { ExperienceItem } from "./ExperienceItem";
 export { Textarea } from "./Textarea";
 export { DatePicker } from "./DatePicker";
+export { Skills } from "./Skills";
+export { SkillItem } from "./SkillItem";
 
 //Yup Validation schema
 export { validationSchema } from "./validationSchema";
