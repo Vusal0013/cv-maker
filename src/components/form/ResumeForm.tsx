@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Formik } from "formik";
-import { Experience, initialValues, validationSchema } from ".";
+import { Experience, Skills, initialValues, validationSchema } from ".";
 import { IFormType } from "../../types/formDataType";
 import { Checkbox, Input } from "./";
 import { PhotoFile } from "./PhotoFile";
@@ -175,16 +175,16 @@ const ResumeForm: React.FC = () => {
                       name={"personalInfo.profileInfo.profession"}
                     />
                   </div>
-                  <Checkbox
-                    name="personalInfo.profileInfo.birthDate.isRequired"
-                    label="Doğum tarixi qeyd etmək istəmirəm"
-                    type="checkbox"
-                  />
                   {values.personalInfo.profileInfo.birthDate.isRequired && (
                     <BirthDate
                       name={"personalInfo.profileInfo.birthDate.date"}
                     />
                   )}
+                  <Checkbox
+                    name="personalInfo.profileInfo.birthDate.isRequired"
+                    label="Doğum tarixi qeyd etmək istəmirəm"
+                    type="checkbox"
+                  />
                   <Input
                     name="personalInfo.profileInfo.contactInfo.email"
                     placeholder="Email"
@@ -201,16 +201,20 @@ const ResumeForm: React.FC = () => {
               )}
               {values.stepper.currentStep === 2 && (
                 <Stepper.Step>
-                  <>
-                    <Experience
-                      fieldName="personalInfo.educationHistory"
-                      values={values.personalInfo.educationHistory}
-                      work
-                      getFieldMeta={getFieldMeta}
-                      getFieldHelpers={getFieldHelpers}
-                      getFieldProps={getFieldProps}
-                    />
-                  </>
+                  <Experience
+                    fieldName="personalInfo.educationHistory"
+                    values={values.personalInfo.educationHistory}
+                    getFieldMeta={getFieldMeta}
+                    getFieldHelpers={getFieldHelpers}
+                    getFieldProps={getFieldProps}
+                  />
+                  <Skills
+                    fieldName="personalInfo.languageSkills"
+                    values={values.personalInfo.languageSkills}
+                    getFieldMeta={getFieldMeta}
+                    getFieldHelpers={getFieldHelpers}
+                    getFieldProps={getFieldProps}
+                  />
                 </Stepper.Step>
               )}
               {/* {values === 3 && (
