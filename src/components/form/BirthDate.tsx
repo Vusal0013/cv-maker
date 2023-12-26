@@ -72,27 +72,30 @@ const BirthDate: React.FC<{ placeholder?: string } & FieldHookConfig<any>> = ({
   }, [date]);
   return (
     <div className="relative">
-      <DatePicker
-        onFocus={() => setFocus((prev) => !prev)}
-        onBlur={() => {
-          setFocus((prev) => !prev), !meta.touched && helpers.setTouched(true);
-        }}
-        onChange={(date) => setDate(date)}
-        dateFormat={"dd.MM.yyyy"}
-        dropdownMode="scroll"
-        showMonthDropdown
-        useShortMonthInDropdown
-        showYearDropdown
-        yearDropdownItemNumber={100}
-        scrollableYearDropdown
-        className="w-full pr-6 py-1 px-2 bg-gray-50 text-[#2e2e2e] border-2 outline-none border-[#cdcdcd] text-center"
-        wrapperClassName="w-full"
-        placeholderText="Doğum tarixi"
-        selected={date}
-        maxDate={new Date()}
-        calendarStartDay={1}
-      />
-      <InputAnimation focus={focus} meta={meta} />
+      <div className="relative">
+        <DatePicker
+          onFocus={() => setFocus((prev) => !prev)}
+          onBlur={() => {
+            setFocus((prev) => !prev),
+              !meta.touched && helpers.setTouched(true);
+          }}
+          onChange={(date) => setDate(date)}
+          dateFormat={"dd.MM.yyyy"}
+          dropdownMode="scroll"
+          showMonthDropdown
+          useShortMonthInDropdown
+          showYearDropdown
+          yearDropdownItemNumber={100}
+          scrollableYearDropdown
+          className="w-full pr-6 py-1 px-2 bg-gray-50 text-[#2e2e2e] border-2 outline-none border-[#cdcdcd] text-center"
+          wrapperClassName="w-full"
+          placeholderText="Doğum tarixi"
+          selected={date}
+          maxDate={new Date()}
+          calendarStartDay={1}
+        />
+        <InputAnimation focus={focus} meta={meta} />
+      </div>
       <ErrorMessage
         name={field.name}
         children={(m) => <InputError children={m} />}
