@@ -12,11 +12,11 @@ import {
   FormikProps,
 } from "formik";
 
-const ExperienceItem: React.FC<{
+interface IExperienceItem {
   work?: boolean;
   lastIndex: number;
   index: number;
-  remove: <X = any>(index: number) => X | undefined;
+  handleRemove: (index: number) => () => void;
   fieldValue: IEducation | IWorkExperience;
   fieldName: string;
   formValues: FormikProps<IFormType>;
@@ -25,7 +25,9 @@ const ExperienceItem: React.FC<{
   getFieldProps: <Value = any>(
     props: string | FieldConfig<Value>
   ) => FieldInputProps<Value>;
-}> = ({
+}
+
+const ExperienceItem: React.FC<IExperienceItem> = ({
   getFieldMeta,
   getFieldHelpers,
   getFieldProps,
@@ -35,17 +37,13 @@ const ExperienceItem: React.FC<{
   index,
   fieldName,
   formValues,
-  remove,
+  handleRemove,
 }) => {
-  const handleRemove = (i: number) => {
-    remove(i);
-  };
-
   return (
     <div className="w-full flex flex-col gap-1">
       <div className="w-full flex justify-center items-center relative">
         <div
-          onClick={() => handleRemove(index)}
+          onClick={handleRemove(index)}
           className="absolute py-1 -right-6 top-0 text-[#cf4343] cursor-pointer"
         >
           <IoIosRemoveCircleOutline size={20} />
@@ -57,6 +55,7 @@ const ExperienceItem: React.FC<{
           getFieldProps={getFieldProps}
           fieldValue={fieldValue}
           formValues={formValues}
+          work={work}
           index={index}
           lastIndex={lastIndex}
         />
