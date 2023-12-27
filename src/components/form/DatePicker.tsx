@@ -72,7 +72,9 @@ const DatePicker: React.FC<IDatePicker> = ({
     setCurrentWork((prev) => !prev);
   };
 
-  const [currentWork, setCurrentWork] = useState<boolean>(false);
+  const [currentWork, setCurrentWork] = useState<boolean>(
+    Boolean(field("currently").value)
+  );
 
   const [date, setDate] = useState<{
     startDate: Date | null;
@@ -99,6 +101,7 @@ const DatePicker: React.FC<IDatePicker> = ({
       field("endDate").name,
       dateToString(date.endDate) ?? ""
     );
+    formValues.setFieldValue(field("currently").name, currentWork);
   }, [date, currentWork]);
 
   useEffect(() => {
@@ -108,6 +111,7 @@ const DatePicker: React.FC<IDatePicker> = ({
   useEffect(() => {
     if (lastIndex !== index) {
       setCurrentWork(false);
+      formValues.setFieldValue(field("currently").name, currentWork);
     }
   }, [lastIndex]);
 
