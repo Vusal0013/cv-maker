@@ -214,7 +214,9 @@ const ResumeForm: React.FC = () => {
                     getFieldMeta={getFieldMeta}
                     getFieldHelpers={getFieldHelpers}
                     getFieldProps={getFieldProps}
+                    language
                   />
+                  <button type="submit">submit</button>
                 </Stepper.Step>
               )}
               {/* {values === 3 && (
