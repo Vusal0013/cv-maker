@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Input, SkillItem } from ".";
+import React from "react";
+import { SkillItem } from ".";
 import {
   FieldArray,
   FieldConfig,
@@ -46,8 +46,12 @@ const Skills: React.FC<ISkills> = ({
             <div className="w-full flex flex-col justify-center items-center gap-3">
               {values.map((fieldValue, i) => (
                 <SkillItem
+                  language={Boolean(language)}
                   key={fieldValue + String(i)}
                   fieldName={name}
+                  getFieldHelpers={getFieldHelpers}
+                  getFieldMeta={getFieldMeta}
+                  getFieldProps={getFieldProps}
                   handlePush={handlePush}
                   handleRemove={handleRemove}
                   index={i}
