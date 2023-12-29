@@ -15,7 +15,6 @@ interface IStep1Props {
 const Step1: React.FC<IStep1Props> = ({ values, setFieldValue }) => {
   return (
     <>
-      {" "}
       <div className="w-full flex flex-col justify-center items-center">
         {values.personalInfo.profileInfo.profilePhoto?.isRequired && (
           <PhotoFile
@@ -52,18 +51,9 @@ const Step1: React.FC<IStep1Props> = ({ values, setFieldValue }) => {
         label="Doğum tarixi qeyd etmək istəmirəm"
         type="checkbox"
       />
-      <Input
-        name="personalInfo.profileInfo.contactInfo.email"
-        placeholder="Email"
-      />
-      <Input
-        name="personalInfo.profileInfo.contactInfo.phone"
-        placeholder="Phone"
-      />
-      <Input
-        name="personalInfo.profileInfo.contactInfo.adress"
-        placeholder="Adress"
-      />
+      <Input name="personalInfo.contactInfo.email" placeholder="Email" />
+      <Input name="personalInfo.contactInfo.phone" placeholder="Phone" />
+      <Input name="personalInfo.contactInfo.adress" placeholder="Adress" />
     </>
   );
 };
