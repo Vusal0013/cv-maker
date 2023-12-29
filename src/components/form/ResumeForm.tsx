@@ -1,11 +1,18 @@
 import React from "react";
-import { Form, Formik } from "formik";
-import { Experience, Skills, initialValues, validationSchema } from ".";
+import { FieldArray, Form, Formik } from "formik";
+import {
+  Experience,
+  Skills,
+  Textarea,
+  initialValues,
+  validationSchema,
+} from ".";
 import { IFormType } from "../../types/formDataType";
 import { Checkbox, Input } from "./";
 import { PhotoFile } from "./PhotoFile";
 import { BirthDate } from "./";
 import { Stepper } from "./Stepper";
+import { IoIosRemoveCircleOutline } from "react-icons/io";
 
 // const stringValidation = "Vacibdir";
 // const validationSchema = {
@@ -219,9 +226,34 @@ const ResumeForm: React.FC = () => {
                   <button type="submit">submit</button>
                 </Stepper.Step>
               )}
-              {/* {values === 3 && (
-
-              )} */}
+              {values.stepper.currentStep === 3 && (
+                <Stepper.Step>
+                  <FieldArray name="professionalInfo.about">
+                    {({ handlePush, handleRemove, name }) => {
+                      return (
+                        <div>
+                          {values.professionalInfo.about.map((_, index) => (
+                            <div key={name + index} className="relative">
+                              <div
+                                onClick={handleRemove(index)}
+                                className="absolute py-1 -right-6 top-0 text-[#cf4343] cursor-pointer"
+                              >
+                                <IoIosRemoveCircleOutline size={20} />
+                              </div>
+                              <Textarea name={`${name}[${index}]`} />
+                            </div>
+                          ))}
+                          {values.professionalInfo.about.length < 3 && (
+                            <button onClick={handlePush("")} type="button">
+                              add
+                            </button>
+                          )}
+                        </div>
+                      );
+                    }}
+                  </FieldArray>
+                </Stepper.Step>
+              )}
             </Stepper>
           )}
           {
