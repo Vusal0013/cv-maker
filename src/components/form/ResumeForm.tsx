@@ -1,13 +1,12 @@
 import React from "react";
 import { Form, Formik } from "formik";
 import { Steps, initialValues, validationSchema } from ".";
-import { IFormType } from "../../types/formDataType";
 import { Stepper } from "./";
 
 const ResumeForm: React.FC = () => {
   return (
     <Formik
-      onSubmit={(val: IFormType) => console.log(val)}
+      onSubmit={(val) => console.log(val)}
       initialValues={initialValues}
       validationSchema={validationSchema}
     >
