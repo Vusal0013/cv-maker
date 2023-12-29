@@ -47,12 +47,28 @@ export const validationSchema = yup.object().shape({
     languageSkills: yup.array().of(
       yup.object().shape({
         language: yup.string().required("Bu alan gereklidir."),
-        proficiency: yup.string().required("Bu alan gereklidir."),
+        proficiency: yup
+          .string()
+          .test(
+            "is-nonzero",
+            "Əgər bu dil üzrə biliyiniz yoxdursa bu punktu silin",
+            function (value) {
+              return value !== "0";
+            }
+          )
+          .required("Bu alan gereklidir."),
       })
     ),
   }),
   professionalInfo: yup.object().shape({
-    about: yup.string().required("Bu alan gereklidir."),
+    about: yup
+      .array()
+      .of(
+        yup
+          .string()
+          .min(50, "minimum 50 simvol ekleyin.")
+          .required("Bu alan gereklidir.")
+      ),
     workExperience: yup.array().of(
       yup.object().shape({
         startDate: yup.string().required("Bu alan gereklidir."),
@@ -73,7 +89,16 @@ export const validationSchema = yup.object().shape({
     skills: yup.array().of(
       yup.object().shape({
         skillName: yup.string().required("Bu alan gereklidir."),
-        proficiency: yup.string().required("Bu alan gereklidir."),
+        proficiency: yup
+          .string()
+          .test(
+            "is-nonzero",
+            "Əgər sahə üzrə biliyiniz yoxdursa bu punktu silin",
+            function (value) {
+              return value !== "0";
+            }
+          )
+          .required("Bu alan gereklidir."),
       })
     ),
   }),
