@@ -41,7 +41,7 @@ const Skills: React.FC<ISkills> = ({
   return (
     <div>
       <FieldArray name={fieldName}>
-        {({ handleRemove, handlePush, name, form }) => (
+        {({ handleRemove, handlePush, name }) => (
           <>
             <div className="w-full flex flex-col justify-center items-center gap-3">
               {values.map((fieldValue, i) => (
