@@ -8,7 +8,7 @@ import {
   FormikErrors,
 } from "formik";
 
-import { Step1, Step2, Step3 } from "..";
+import { Step1, Step2, Step3, Step4 } from "..";
 
 interface IStepsProps {
   values: IFormType;
@@ -47,7 +47,14 @@ const Steps: React.FC<IStepsProps> = ({
       case 3:
         return <Step3 values={values} />;
       case 4:
-        return null;
+        return (
+          <Step4
+            values={values}
+            getFieldHelpers={getFieldHelpers}
+            getFieldMeta={getFieldMeta}
+            getFieldProps={getFieldProps}
+          />
+        );
 
       default:
         return null;
