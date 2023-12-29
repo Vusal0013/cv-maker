@@ -40,7 +40,6 @@ const Step2: React.FC<IStep2Props> = ({
         getFieldProps={getFieldProps}
         language
       />
-      <button type="submit">submit</button>
     </>
   );
 };
