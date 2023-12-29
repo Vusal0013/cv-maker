@@ -52,10 +52,8 @@ const Skills: React.FC<ISkills> = ({
                   getFieldHelpers={getFieldHelpers}
                   getFieldMeta={getFieldMeta}
                   getFieldProps={getFieldProps}
-                  handlePush={handlePush}
                   handleRemove={handleRemove}
                   index={i}
-                  fieldValue={fieldValue}
                 />
               ))}
             </div>
