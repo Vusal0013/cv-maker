@@ -26,12 +26,14 @@ const Input: React.FC<IInput & FieldHookConfig<any>> = ({
       }`}
     >
       <div className="relative w-full">
-        <label
-          className="text-[#2e2e2e] text-xs font-normal"
-          htmlFor={field.name}
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            className="text-[#2e2e2e] text-xs font-normal"
+            htmlFor={field.name}
+          >
+            {label}
+          </label>
+        )}
         <div className="relative">
           <input
             placeholder={placeholder}

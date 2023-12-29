@@ -19,12 +19,14 @@ const Textarea: React.FC<ITextarea & FieldHookConfig<any>> = ({
   return (
     <div className="w-full flex justify-center items-center">
       <div className="relative w-full">
-        <label
-          className="text-[#2e2e2e] text-xs font-normal"
-          htmlFor={field.name}
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            className="text-[#2e2e2e] text-xs font-normal"
+            htmlFor={field.name}
+          >
+            {label}
+          </label>
+        )}
         <div className="relative w-full h-40">
           <textarea
             placeholder={placeholder}
