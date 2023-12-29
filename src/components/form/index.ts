@@ -13,6 +13,9 @@ export { DatePicker } from "./DatePicker";
 export { Skills } from "./Skills";
 export { SkillItem } from "./SkillItem";
 
+//Stepper
+export { Stepper, Steps, Step1, Step2, Step3, Step4 } from "./FormStepper/";
+
 //Yup Validation schema
 export { validationSchema } from "./validationSchema";
 //Formik initial Values
