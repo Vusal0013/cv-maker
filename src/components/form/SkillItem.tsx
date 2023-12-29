@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Input, InputError } from ".";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
-import { ILanguageSkill, IProfessionalSkills } from "../../types";
 import {
   ErrorMessage,
   FieldConfig,
@@ -13,7 +12,6 @@ import classNames from "classnames";
 
 interface ISkillItem {
   language: boolean;
-  handlePush: <X = any>(obj: X) => () => void;
   handleRemove: (index: number) => () => void;
   getFieldMeta: <Value>(name: string) => FieldMetaProps<Value>;
   getFieldHelpers: <Value = any>(name: string) => FieldHelperProps<Value>;
@@ -22,19 +20,16 @@ interface ISkillItem {
   ) => FieldInputProps<Value>;
   fieldName: string;
   index: number;
-  fieldValue: ILanguageSkill | IProfessionalSkills;
 }
 
 const SkillItem: React.FC<ISkillItem> = ({
   language,
   handleRemove,
-  handlePush,
   getFieldHelpers,
   getFieldMeta,
   getFieldProps,
   index,
   fieldName,
-  fieldValue,
 }) => {
   const field = (childField: string) => {
     return getFieldProps(`${fieldName}[${index}].${childField}`);
