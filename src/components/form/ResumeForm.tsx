@@ -2,11 +2,17 @@ import React from "react";
 import { Form, Formik } from "formik";
 import { Steps, initialValues, validationSchema } from ".";
 import { Stepper } from "./";
+import { useAppDispatch } from "../../store/hooks";
+import { actions } from "../../reducers/formSlice";
 
 const ResumeForm: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <Formik
-      onSubmit={(val) => console.log(val)}
+      onSubmit={(val) => {
+        dispatch(actions.setUserData(val));
+      }}
       initialValues={initialValues}
       validationSchema={validationSchema}
     >
