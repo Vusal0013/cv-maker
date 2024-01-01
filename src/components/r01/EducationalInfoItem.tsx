@@ -10,10 +10,12 @@ const EducationalInfoItem: React.FC<IEducation> = ({
   return (
     <li className="mb-4">
       <h5 className="text-[#03a9f4] font-medium text-sm">
-        {startDate} - {endDate}
+        {startDate} - {endDate ? endDate : "Davam edir"}
       </h5>
       <h4 className="text-white font-medium italic">{university}</h4>
-      <h4 className="text-white font-extralight italic">{profession}</h4>
+      {profession && (
+        <h4 className="text-white font-extralight italic">{profession}</h4>
+      )}
     </li>
   );
 };

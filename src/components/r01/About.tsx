@@ -9,13 +9,9 @@ const About: React.FC = () => {
       <h2 className="text-[#003147] text-2xl font-bold uppercase tracking-wider mb-7">
         HAQQINDA
       </h2>
-      {Array.isArray(about) ? (
-        about.map((p) => (
-          <AboutItem key={p.slice(-15, -3)} aboutParagraph={p} />
-        ))
-      ) : (
-        <AboutItem aboutParagraph={about} />
-      )}
+      {about.map((p) => (
+        <AboutItem key={p} aboutParagraph={p} />
+      ))}
     </div>
   );
 };
