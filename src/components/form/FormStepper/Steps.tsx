@@ -8,6 +8,9 @@ import {
   FormikErrors,
 } from "formik";
 
+//demo
+import { Link } from "react-router-dom";
+
 import { Step1, Step2, Step3, Step4 } from "..";
 
 interface IStepsProps {
@@ -93,7 +96,11 @@ const Steps: React.FC<IStepsProps> = ({
           Növbəti
         </button>
       ) : (
+      <>
         <button type="submit">Submit</button>
+        //demo
+        <Link to="/resume">get Resume</Link>
+      </>
       )}
     </>
   );
