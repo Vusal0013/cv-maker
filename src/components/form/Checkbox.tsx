@@ -23,9 +23,11 @@ const Checkbox: React.FC<ICheckbox & FieldHookConfig<any>> = ({
       >
         {!field.value && <FaCheck size={13} />}
       </div>
-      <label className="select-none" onClick={handleSetVal}>
-        {label}
-      </label>
+      {label && (
+        <label className="select-none" onClick={handleSetVal}>
+          {label}
+        </label>
+      )}
     </div>
   );
 };

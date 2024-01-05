@@ -25,6 +25,7 @@ interface IDatePicker {
   fieldName: string;
   fieldValue: IEducation | IWorkExperience;
   formValues: FormikProps<IFormType>;
+  work?: boolean;
   getFieldMeta: <Value>(name: string) => FieldMetaProps<Value>;
   getFieldHelpers: <Value = any>(name: string) => FieldHelperProps<Value>;
   getFieldProps: <Value = any>(
@@ -37,6 +38,7 @@ const DatePicker: React.FC<IDatePicker> = ({
   lastIndex,
   index,
   formValues,
+  work,
   getFieldMeta,
   getFieldHelpers,
   getFieldProps,
@@ -70,7 +72,9 @@ const DatePicker: React.FC<IDatePicker> = ({
     setCurrentWork((prev) => !prev);
   };
 
-  const [currentWork, setCurrentWork] = useState<boolean>(false);
+  const [currentWork, setCurrentWork] = useState<boolean>(
+    Boolean(field("currently").value)
+  );
 
   const [date, setDate] = useState<{
     startDate: Date | null;
@@ -97,6 +101,7 @@ const DatePicker: React.FC<IDatePicker> = ({
       field("endDate").name,
       dateToString(date.endDate) ?? ""
     );
+    formValues.setFieldValue(field("currently").name, currentWork);
   }, [date, currentWork]);
 
   useEffect(() => {
@@ -106,6 +111,7 @@ const DatePicker: React.FC<IDatePicker> = ({
   useEffect(() => {
     if (lastIndex !== index) {
       setCurrentWork(false);
+      formValues.setFieldValue(field("currently").name, currentWork);
     }
   }, [lastIndex]);
 
@@ -257,7 +263,9 @@ const DatePicker: React.FC<IDatePicker> = ({
           </div>
 
           <label className="select-none" onClick={handleCurrentWork}>
-            Hal-hazırda burada çalışıram
+            {work
+              ? "Hal-hazırda burada çalışıram"
+              : "Hal-hazırda burada Təhsil alıram"}
           </label>
         </div>
       )}

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { FaCheck } from "react-icons/fa6";
-import { IStepper, IStepperHeader } from "../../types";
+import { IStepper, IStepperHeader } from "../../../types";
 import classNames from "classnames";
 
 const Stepper: React.FC<{ children: React.ReactNode }> & IStepper = ({

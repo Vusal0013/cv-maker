@@ -1,20 +1,8 @@
 import React from "react";
 import { FaEnvelope, FaPhone, FaHouseChimney } from "react-icons/fa6";
 import useDataFiller from "../../hooks/useDataFiller";
-// import { useAppSelector } from "../../store/hooks";
 
 const ContactInfo: React.FC = () => {
-  // const placeholderData = useAppSelector((state) => {
-  //   if (state.form.onDemo) {
-  //     return state.form.placeholderData.personalInfo.contactInfo;
-  //   } else {
-  //     return (
-  //       state.form.userData?.personalInfo.contactInfo ||
-  //       state.form.placeholderData.personalInfo.contactInfo
-  //     );
-  //   }
-  // });
-
   const { contactInfo } = useDataFiller((data) => data.personalInfo);
 
   return (
@@ -39,14 +27,16 @@ const ContactInfo: React.FC = () => {
             {contactInfo.phone}
           </span>
         </li>
-        <li className="flex items-center mx-0 my-2 h-7">
-          <span className="inline-block text-base w-4 text-[#03a9f4]">
-            <FaHouseChimney />
-          </span>
-          <span className="text-white text-sm font-light pl-2">
-            {contactInfo.address}
-          </span>
-        </li>
+        {contactInfo.address && (
+          <li className="flex items-center mx-0 my-2 h-7">
+            <span className="inline-block text-base w-4 text-[#03a9f4]">
+              <FaHouseChimney />
+            </span>
+            <span className="text-white text-sm font-light pl-2">
+              {contactInfo.address}
+            </span>
+          </li>
+        )}
       </ul>
     </div>
   );

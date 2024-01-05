@@ -5,12 +5,14 @@ import { InputAnimation, InputError } from ".";
 export type IInput = {
   label?: string;
   placeholder?: string;
+  wrapperClassName?: string;
 };
 
 const Input: React.FC<IInput & FieldHookConfig<any>> = ({
   label,
   type,
   placeholder,
+  wrapperClassName,
   ...props
 }) => {
   const [field, meta] = useField(props);
@@ -18,14 +20,20 @@ const Input: React.FC<IInput & FieldHookConfig<any>> = ({
   const [inputFocus, setInputFocus] = useState<boolean>(false);
 
   return (
-    <div className="w-full flex justify-center items-center">
+    <div
+      className={`w-full flex justify-center items-center ${
+        wrapperClassName ? wrapperClassName : ""
+      }`}
+    >
       <div className="relative w-full">
-        <label
-          className="text-[#2e2e2e] text-xs font-normal"
-          htmlFor={field.name}
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            className="text-[#2e2e2e] text-xs font-normal"
+            htmlFor={field.name}
+          >
+            {label}
+          </label>
+        )}
         <div className="relative">
           <input
             placeholder={placeholder}

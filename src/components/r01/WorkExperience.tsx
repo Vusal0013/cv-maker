@@ -5,9 +5,8 @@ import { WorkExperinceItem } from ".";
 const WorkExperience: React.FC = () => {
   const { workExperience } = useDataFiller((data) => data.professionalInfo);
 
-  const data = Array.isArray(workExperience)
-    ? [...workExperience].reverse()
-    : workExperience;
+  const data =
+    workExperience.length > 1 ? [...workExperience].reverse() : workExperience;
 
   return (
     <div className="mb-12">
